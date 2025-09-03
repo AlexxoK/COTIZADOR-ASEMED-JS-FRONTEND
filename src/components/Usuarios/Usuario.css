@@ -1,0 +1,166 @@
+main {
+    padding: 30px;
+    background: #eef2f7;
+    min-height: 100vh;
+}
+
+main h1 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #1e293b;
+    text-align: center;
+    font-weight: bold;
+}
+
+.section-title {
+    font-size: 26px;
+    margin: 40px 0 25px;
+    color: #334155;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 25px;
+    padding: 0;
+    list-style: none;
+}
+
+.user-card {
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    flex-direction: column;
+}
+
+.user-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.user-card.admin {
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    border-left: 6px solid #4f46e5;
+}
+
+.user-card.cliente {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border-left: 6px solid #10b981;
+}
+
+.avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 12px;
+}
+
+.user-card.cliente .avatar {
+    background: #10b981;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info h2 {
+    font-size: 20px;
+    margin: 0 0 6px;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-info .role {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.user-info p {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status.active {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status.inactive {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.user-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.user-actions button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    border: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.user-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.user-actions .btn-role-admin {
+    background-color: #3b82f6;
+    color: #fff;
+}
+
+.user-actions .btn-role-cliente {
+    background-color: #10b981;
+    color: #fff;
+}
+
+.user-actions .btn-delete {
+    background-color: #ef4444;
+    color: #fff;
+}

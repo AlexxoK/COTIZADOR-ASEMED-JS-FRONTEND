@@ -1,0 +1,79 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1f2937;
+    font-family: Arial, sans-serif;
+}
+
+.register-box {
+    background: #2d3748;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    color: white;
+}
+
+.register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.register-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.register-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-box button:hover {
+    background-color: #2563eb;
+}
+
+.register-box button:disabled {
+    background-color: #60a5fa;
+    cursor: not-allowed;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #e2e8f0;
+    font-size: 14px;
+}
+
+.login-link span {
+    color: #3b82f6;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.login-link span:hover {
+    color: #2563eb;
+}
