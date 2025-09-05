@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { traerUsuarios, actualizarUsuario, eliminarUsuario } from "../../services/api";
+import { traerUsuarios, actualizarUsuario, eliminarUsuario, traerUsuarioLogueado } from "../../services/api";
 
 export const useClienteHook = () => {
     const [listaUsuarios, setListaUsuarios] = useState([]);
+    const [usuarioLogueado, setUsuarioLogueado] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const handleListaUsuarios = async () => {
@@ -19,7 +20,26 @@ export const useClienteHook = () => {
                 title: 'Error',
                 text: backendError?.error || backendError?.msg || 'Error',
                 icon: 'error'
-            });
+            })
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const handleUsuarioLogueado = async () => {
+        if (loading) return;
+        setLoading(true);
+        try {
+            const response = await traerUsuarioLogueado();
+            console.log(response, "Usuario Logueado");
+            setUsuarioLogueado(response.data.usuario);
+        } catch (error) {
+            const backendError = error.response?.data;
+            Swal.fire({
+                title: 'Error',
+                text: backendError?.error || backendError?.msg || 'Error al traer usuario logueado',
+                icon: 'error'
+            })
         } finally {
             setLoading(false);
         }
@@ -37,10 +57,8 @@ export const useClienteHook = () => {
             cancelButtonText: 'Cancelar',
             color: 'white',
             background: '#1f2937',
-            customClass: {
-                popup: 'animate__animated animate__fadeInDown',
-            }
-        });
+            customClass: { popup: 'animate__animated animate__fadeInDown' }
+        })
 
         if (confirm.isConfirmed) {
             try {
@@ -55,10 +73,8 @@ export const useClienteHook = () => {
                     timer: 1500,
                     color: 'white',
                     background: '#1f2937',
-                    customClass: {
-                        popup: 'animate__animated animate__fadeInDown',
-                    }
-                });
+                    customClass: { popup: 'animate__animated animate__fadeInDown' }
+                })
 
                 await handleListaUsuarios();
             } catch (error) {
@@ -67,7 +83,7 @@ export const useClienteHook = () => {
                     title: 'Error',
                     text: backendError?.error || backendError?.msg || 'Error al actualizar usuario',
                     icon: 'error'
-                });
+                })
             } finally {
                 setLoading(false);
             }
@@ -86,10 +102,8 @@ export const useClienteHook = () => {
             cancelButtonText: 'Cancelar',
             color: 'white',
             background: '#1f2937',
-            customClass: {
-                popup: 'animate__animated animate__fadeInDown',
-            }
-        });
+            customClass: { popup: 'animate__animated animate__fadeInDown' }
+        })
 
         if (confirm.isConfirmed) {
             try {
@@ -104,10 +118,8 @@ export const useClienteHook = () => {
                     timer: 1500,
                     color: 'white',
                     background: '#1f2937',
-                    customClass: {
-                        popup: 'animate__animated animate__fadeInDown',
-                    }
-                });
+                    customClass: { popup: 'animate__animated animate__fadeInDown' }
+                })
 
                 await handleListaUsuarios();
             } catch (error) {
@@ -116,12 +128,12 @@ export const useClienteHook = () => {
                     title: 'Error',
                     text: backendError?.error || backendError?.msg || 'Error al eliminar usuario',
                     icon: 'error'
-                });
+                })
             } finally {
                 setLoading(false);
             }
         }
     }
 
-    return { listaUsuarios, handleListaUsuarios, handleActualizarUsuario, handleEliminarUsuario, loading };
+    return { listaUsuarios, usuarioLogueado, handleListaUsuarios, handleUsuarioLogueado, handleActualizarUsuario, handleEliminarUsuario, loading };
 }

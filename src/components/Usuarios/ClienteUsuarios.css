@@ -1,0 +1,126 @@
+.clt-main {
+    padding: 30px;
+    background: #f4f6f9;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.clt-main h1 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #1e293b;
+    text-align: center;
+    font-weight: bold;
+}
+
+.clt-user-list {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.clt-user-card {
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border-left: 6px solid #10b981;
+    max-width: 420px;
+    width: 100%;
+}
+
+.clt-user-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.clt-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #fff;
+    font-weight: bold;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.clt-user-info h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #1f2937;
+    text-align: center;
+}
+
+.clt-user-info p {
+    font-size: 15px;
+    color: #374151;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.clt-user-info input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clt-user-info input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.clt-user-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.clt-user-actions button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.clt-user-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.clt-btn-role-cliente {
+    background-color: #10b981;
+    color: white;
+}
+
+.clt-btn-delete {
+    background-color: #ef4444;
+    color: white;
+}
+
+.clt-loading {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
+    color: #6b7280;
+}

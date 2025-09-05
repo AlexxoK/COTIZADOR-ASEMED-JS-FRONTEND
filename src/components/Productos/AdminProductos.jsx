@@ -3,17 +3,11 @@ import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import Navbar from "../Layout/Navbar";
 import Sidebar from "../Layout/Sidebar";
 import { useProductoHook } from "../../shared/hooks/useProductos";
-import "./Producto.css";
+import "./AdminProductos.css";
 
 const AdminProductos = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const {
-        productosList,
-        handleTraerProductos,
-        handleActualizarProducto,
-        handleEliminarProducto,
-        handleActivarProducto
-    } = useProductoHook();
+    const { productosList, handleTraerProductos, handleActualizarProducto, handleEliminarProducto, handleActivarProducto } = useProductoHook();
 
     const [expandedDesc, setExpandedDesc] = useState({});
     const [editingId, setEditingId] = useState(null);
@@ -23,7 +17,7 @@ const AdminProductos = () => {
     const [searchCategory, setSearchCategory] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
 
-    const productsPerPage = 15;
+    const productsPerPage = 30;
     const maxLength = 100;
 
     const categoriasDisponibles = [
@@ -31,10 +25,7 @@ const AdminProductos = () => {
     ]
 
     useEffect(() => {
-        const fetchProductos = async () => {
-            await handleTraerProductos();
-        };
-        fetchProductos();
+        handleTraerProductos();
     }, [])
 
     useEffect(() => {
@@ -42,7 +33,7 @@ const AdminProductos = () => {
         if (searchCategory) {
             result = result.filter(
                 (p) => p.categoria?.toLowerCase() === searchCategory.toLowerCase()
-            );
+            )
         }
         if (search) {
             result = result.filter((p) =>
@@ -101,10 +92,10 @@ const AdminProductos = () => {
         <div>
             <Navbar toggleSidebar={toggleSidebar} />
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-            <main>
+            <main className="adm-main">
                 <h1>Gestión de Productos</h1>
 
-                <div className="search-bar">
+                <div className="adm-search-bar">
                     <input
                         type="text"
                         placeholder="Buscar productos por nombre..."
@@ -113,7 +104,7 @@ const AdminProductos = () => {
                     />
                 </div>
 
-                <div className="category-select-container">
+                <div className="adm-category-select-container">
                     <select
                         value={searchCategory}
                         onChange={(e) => setSearchCategory(e.target.value)}
@@ -129,19 +120,19 @@ const AdminProductos = () => {
 
                 {filteredProducts.length > 0 ? (
                     <>
-                        <ul className="productos-list">
+                        <ul className="adm-productos-list">
                             {currentProducts.map((producto) => {
                                 const isExpanded = expandedDesc[producto._id];
                                 const shortDesc = producto.descripcion?.slice(0, maxLength);
                                 const isEditing = editingId === producto._id;
 
                                 return (
-                                    <li key={producto._id} className="producto-card uniform-card">
+                                    <li key={producto._id} className="adm-producto-card uniform-card">
                                         {producto.imagen && (
                                             <img
                                                 src={producto.imagen}
                                                 alt={producto.nombre}
-                                                className="producto-imagen"
+                                                className="adm-producto-imagen"
                                             />
                                         )}
 
@@ -179,7 +170,7 @@ const AdminProductos = () => {
                                                     onChange={handleChange}
                                                     placeholder="Enlace"
                                                 />
-                                                <div className="modal-actions">
+                                                <div className="adm-modal-actions">
                                                     <button type="submit">Guardar</button>
                                                     <button type="button" onClick={cancelEditing}>
                                                         Cancelar
@@ -200,7 +191,7 @@ const AdminProductos = () => {
                                                         {producto.descripcion.length > maxLength && (
                                                             <button
                                                                 onClick={() => toggleDescription(producto._id)}
-                                                                className="toggle-desc-btn"
+                                                                className="adm-toggle-desc-btn"
                                                             >
                                                                 {isExpanded ? "Mostrar menos" : "Mostrar más"}
                                                             </button>
@@ -232,17 +223,17 @@ const AdminProductos = () => {
                                                     {producto.estado ? "Activo" : "Inactivo"}
                                                 </p>
 
-                                                <div className="action-buttons">
+                                                <div className="adm-action-buttons">
                                                     {producto.estado ? (
                                                         <>
                                                             <button
-                                                                className="btn-editar"
+                                                                className="adm-btn-editar"
                                                                 onClick={() => startEditing(producto)}
                                                             >
                                                                 <FaEdit />
                                                             </button>
                                                             <button
-                                                                className="btn-eliminar"
+                                                                className="adm-btn-eliminar"
                                                                 onClick={() => handleEliminarProducto(producto._id)}
                                                             >
                                                                 <FaTrash />
@@ -250,7 +241,7 @@ const AdminProductos = () => {
                                                         </>
                                                     ) : (
                                                         <button
-                                                            className="btn-activar"
+                                                            className="adm-btn-activar"
                                                             onClick={() => handleActivarProducto(producto._id)}
                                                         >
                                                             <FaCheck />
@@ -260,18 +251,35 @@ const AdminProductos = () => {
                                             </>
                                         )}
                                     </li>
-                                );
+                                )
                             })}
                         </ul>
 
                         {totalPages > 1 && (
-                            <div className="pagination-card">
-                                <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+                            <div className="adm-pagination-card">
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                >
                                     Anterior
                                 </button>
-                                {[...Array(totalPages)].map((_, i) => {
-                                    const page = i + 1;
-                                    return (
+
+                                {(() => {
+                                    const maxPagesToShow = 10;
+                                    let startPage = Math.max(currentPage - Math.floor(maxPagesToShow / 2), 1);
+                                    let endPage = startPage + maxPagesToShow - 1;
+
+                                    if (endPage > totalPages) {
+                                        endPage = totalPages;
+                                        startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+                                    }
+
+                                    const pageNumbers = [];
+                                    for (let i = startPage; i <= endPage; i++) {
+                                        pageNumbers.push(i);
+                                    }
+
+                                    return pageNumbers.map((page) => (
                                         <button
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
@@ -279,9 +287,13 @@ const AdminProductos = () => {
                                         >
                                             {page}
                                         </button>
-                                    );
-                                })}
-                                <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>
+                                    ))
+                                })()}
+
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                >
                                     Siguiente
                                 </button>
                             </div>

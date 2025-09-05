@@ -14,7 +14,8 @@ const RegisterForm = () => {
         password: "",
         phone: "",
         role: "CLIENTE"
-    });
+    })
+
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
@@ -36,7 +37,7 @@ const RegisterForm = () => {
                 text: "Bienvenido a ASEMED!",
                 background: '#1f2937',
                 color: 'white',
-            });
+            })
 
             setFormData({
                 nombre: "",
@@ -80,11 +81,14 @@ const RegisterForm = () => {
                     <label>Correo</label>
                     <input type="email" name="correo" value={formData.correo} onChange={handleChange} placeholder="Escribe tu correo con @" required />
 
+                    <label>Teléfono</label>
+                    <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Escribe tu teléfono" required minLength={8} maxLength={8} />
+
                     <label>Contraseña</label>
                     <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Escribe tu contraseña" required minLength={8} />
 
-                    <label>Teléfono</label>
-                    <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Escribe tu teléfono" required minLength={8} maxLength={8} />
+                    <label>NIT</label>
+                    <input type="text" name="nit" value={formData.nit} onChange={handleChange} placeholder="Escribe tu NIT o C/F" maxLength={9} />
 
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? "Registrando..." : "Registrarse"}

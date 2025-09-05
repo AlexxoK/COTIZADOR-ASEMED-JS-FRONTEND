@@ -1,10 +1,10 @@
-main {
+.adm-main {
     padding: 30px;
     background: #eef2f7;
     min-height: 100vh;
 }
 
-main h1 {
+.adm-main h1 {
     font-size: 32px;
     margin-bottom: 40px;
     color: #1e293b;
@@ -12,7 +12,7 @@ main h1 {
     font-weight: bold;
 }
 
-.section-title {
+.adm-section-title {
     font-size: 26px;
     margin: 40px 0 25px;
     color: #334155;
@@ -24,7 +24,7 @@ main h1 {
     gap: 10px;
 }
 
-.user-list {
+.adm-user-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 25px;
@@ -32,7 +32,7 @@ main h1 {
     list-style: none;
 }
 
-.user-card {
+.adm-user-card {
     border-radius: 16px;
     padding: 28px 24px;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
@@ -44,22 +44,22 @@ main h1 {
     flex-direction: column;
 }
 
-.user-card:hover {
+.adm-user-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
 }
 
-.user-card.admin {
+.adm-user-card.admin {
     background: linear-gradient(135deg, #eef2ff, #e0e7ff);
     border-left: 6px solid #4f46e5;
 }
 
-.user-card.cliente {
+.adm-user-card.cliente {
     background: linear-gradient(135deg, #ecfdf5, #d1fae5);
     border-left: 6px solid #10b981;
 }
 
-.avatar {
+.adm-avatar {
     width: 65px;
     height: 65px;
     border-radius: 50%;
@@ -76,15 +76,15 @@ main h1 {
     margin-bottom: 12px;
 }
 
-.user-card.cliente .avatar {
+.adm-user-card.cliente .adm-avatar {
     background: #10b981;
 }
 
-.user-info {
+.adm-user-info {
     flex: 1;
 }
 
-.user-info h2 {
+.adm-user-info h2 {
     font-size: 20px;
     margin: 0 0 6px;
     color: #1f2937;
@@ -93,7 +93,7 @@ main h1 {
     gap: 8px;
 }
 
-.user-info .role {
+.adm-user-info .role {
     font-size: 15px;
     color: #6b7280;
     margin-bottom: 14px;
@@ -103,7 +103,7 @@ main h1 {
     font-weight: 500;
 }
 
-.user-info p {
+.adm-user-info p {
     margin: 6px 0;
     font-size: 15px;
     color: #374151;
@@ -112,7 +112,7 @@ main h1 {
     gap: 8px;
 }
 
-.status {
+.adm-status {
     display: inline-block;
     padding: 5px 12px;
     border-radius: 20px;
@@ -120,24 +120,24 @@ main h1 {
     font-weight: bold;
 }
 
-.status.active {
+.adm-status.active {
     background: #dcfce7;
     color: #16a34a;
 }
 
-.status.inactive {
+.adm-status.inactive {
     background: #fee2e2;
     color: #dc2626;
 }
 
-.user-actions {
+.adm-user-actions {
     display: flex;
     gap: 10px;
     margin-top: 10px;
     justify-content: flex-end;
 }
 
-.user-actions button {
+.adm-user-actions button {
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
@@ -146,21 +146,21 @@ main h1 {
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.user-actions button:hover {
+.adm-user-actions button:hover {
     transform: translateY(-2px);
 }
 
-.user-actions .btn-role-admin {
+.adm-user-actions .btn-role-admin {
     background-color: #3b82f6;
     color: #fff;
 }
 
-.user-actions .btn-role-cliente {
+.adm-user-actions .btn-role-cliente {
     background-color: #10b981;
     color: #fff;
 }
 
-.user-actions .btn-delete {
+.adm-user-actions .btn-delete {
     background-color: #ef4444;
     color: #fff;
 }

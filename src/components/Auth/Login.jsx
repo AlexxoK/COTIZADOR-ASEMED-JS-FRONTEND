@@ -29,7 +29,7 @@ const LoginForm = () => {
                 didOpen: () => {
                     Swal.showLoading();
                 }
-            });
+            })
 
             navigate("/dashboard");
         } catch (error) {
@@ -40,7 +40,7 @@ const LoginForm = () => {
                 text: errorMsg,
                 background: '#1f2937',
                 color: 'white',
-            });
+            })
         } finally {
             setIsLoading(false);
         }
@@ -49,7 +49,7 @@ const LoginForm = () => {
     return (
         <div className="login-container">
             <div className="login-box">
-                <h2>Iniciar Sesión</h2>
+                <h2>ASEMED</h2>
                 <form onSubmit={onSubmit}>
                     <label>Correo</label>
                     <input

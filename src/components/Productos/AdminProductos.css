@@ -1,4 +1,4 @@
-.productos-list {
+.adm-productos-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
@@ -6,7 +6,7 @@
     list-style: none;
 }
 
-.producto-card.uniform-card {
+.adm-producto-card.uniform-card {
     background: #f9fafb;
     border-radius: 16px;
     padding: 24px;
@@ -17,36 +17,36 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.producto-card.uniform-card:hover {
+.adm-producto-card.uniform-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
 }
 
-.producto-card img.producto-imagen {
+.adm-producto-card img.adm-producto-imagen {
     width: 100%;
     height: 180px;
     object-fit: cover;
     border-radius: 12px;
 }
 
-.producto-card h2 {
+.adm-producto-card h2 {
     margin: 0;
     font-size: 20px;
     color: #1f2937;
 }
 
-.producto-card p {
+.adm-producto-card p {
     margin: 4px 0;
     font-size: 14px;
     color: #374151;
 }
 
-.producto-card a {
+.adm-producto-card a {
     color: #3b82f6;
     text-decoration: underline;
 }
 
-.toggle-desc-btn {
+.adm-toggle-desc-btn {
     margin-left: 5px;
     background: none;
     border: none;
@@ -57,13 +57,13 @@
     padding: 0;
 }
 
-.search-bar {
+.adm-search-bar {
     display: flex;
     justify-content: center;
     margin: 20px 0;
 }
 
-.search-bar input {
+.adm-search-bar input {
     width: 400px;
     padding: 8px 12px;
     border-radius: 8px;
@@ -74,23 +74,23 @@
     text-align: center;
 }
 
-.search-bar input:focus {
+.adm-search-bar input:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
 }
 
-.search-bar input::placeholder {
+.adm-search-bar input::placeholder {
     color: #9ca3af;
 }
 
-.category-select-container {
+.adm-category-select-container {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
     width: 100%;
 }
 
-.category-select-container select {
+.adm-category-select-container select {
     padding: 10px 14px;
     border-radius: 12px;
     border: 1px solid #d1d5db;
@@ -106,13 +106,13 @@
     min-width: 220px;
 }
 
-.category-select-container select:hover,
-.category-select-container select:focus {
+.adm-category-select-container select:hover,
+.adm-category-select-container select:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
 }
 
-.pagination-card {
+.adm-pagination-card {
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -125,7 +125,7 @@
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
-.pagination-card button {
+.adm-pagination-card button {
     padding: 8px 14px;
     border-radius: 12px;
     border: none;
@@ -136,18 +136,18 @@
     transition: all 0.2s ease;
 }
 
-.pagination-card button:hover:not(:disabled) {
+.adm-pagination-card button:hover:not(:disabled) {
     background-color: #2563eb;
     transform: translateY(-2px);
 }
 
-.pagination-card button:disabled {
+.adm-pagination-card button:disabled {
     background-color: #cbd5e1;
     color: #6b7280;
     cursor: not-allowed;
 }
 
-.pagination-card button.current-page {
+.adm-pagination-card button.current-page {
     background-color: #2563eb;
     color: #fff;
     pointer-events: none;
@@ -155,7 +155,7 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.producto-card form {
+.adm-producto-card form {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -165,15 +165,15 @@
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
-.producto-card form h2 {
+.adm-producto-card form h2 {
     margin: 0;
     font-size: 18px;
     color: #1f2937;
     text-align: center;
 }
 
-.producto-card form input,
-.producto-card form textarea {
+.adm-producto-card form input,
+.adm-producto-card form textarea {
     padding: 10px 12px;
     border-radius: 10px;
     border: 1px solid #d1d5db;
@@ -182,19 +182,19 @@
     width: 100%;
 }
 
-.producto-card form textarea {
+.adm-producto-card form textarea {
     resize: vertical;
     min-height: 60px;
 }
 
-.modal-actions {
+.adm-modal-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: 8px;
 }
 
-.modal-actions button[type="submit"] {
+.adm-modal-actions button[type="submit"] {
     background-color: #3b82f6;
     color: #fff;
     border-radius: 10px;
@@ -203,7 +203,7 @@
     cursor: pointer;
 }
 
-.modal-actions button[type="button"] {
+.adm-modal-actions button[type="button"] {
     background-color: #e5e7eb;
     color: #1f2937;
     border-radius: 10px;
@@ -212,15 +212,15 @@
     cursor: pointer;
 }
 
-.action-buttons {
+.adm-action-buttons {
     display: flex;
     gap: 6px;
     margin-top: auto;
 }
 
-.btn-editar,
-.btn-eliminar,
-.btn-activar {
+.adm-btn-editar,
+.adm-btn-eliminar,
+.adm-btn-activar {
     width: 40px;
     height: 40px;
     border: none;
@@ -233,26 +233,26 @@
     color: #fff;
 }
 
-.btn-editar {
+.adm-btn-editar {
     background-color: #3b82f6;
 }
 
-.btn-editar:hover {
+.adm-btn-editar:hover {
     background-color: #2563eb;
 }
 
-.btn-eliminar {
+.adm-btn-eliminar {
     background-color: #ef4444;
 }
 
-.btn-eliminar:hover {
+.adm-btn-eliminar:hover {
     background-color: #dc2626;
 }
 
-.btn-activar {
+.adm-btn-activar {
     background-color: #10b981;
 }
 
-.btn-activar:hover {
+.adm-btn-activar:hover {
     background-color: #059669;
 }

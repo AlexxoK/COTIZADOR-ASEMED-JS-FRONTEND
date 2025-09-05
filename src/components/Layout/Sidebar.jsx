@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Box, User } from 'lucide-react';
+import { FaFileInvoiceDollar } from 'react-icons/fa';
 import { useEffect, useRef } from 'react';
 import './Sidebar.css';
 import { UsuariosAdminNavigate } from "../../shared/hooks/useDashboard";
+import { UsuariosClienteNavigate } from "../../shared/hooks/useDashboard";
 import { ProductosAdminNavigate } from "../../shared/hooks/useDashboard";
+import { CotizacionesAdminNavigate } from "../../shared/hooks/useDashboard";
+import { CotizacionesClienteNavigate } from "../../shared/hooks/useDashboard";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
     const navigate = useNavigate();
@@ -11,7 +15,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     const sidebarRef = useRef(null);
 
     const { handleUsuariosAdmin } = UsuariosAdminNavigate();
+    const { handleUsuariosCliente } = UsuariosClienteNavigate();
     const { handleProductosAdmin } = ProductosAdminNavigate();
+    const { handleCotizacionesAdmin } = CotizacionesAdminNavigate();
+    const { handleCotizacionesCliente } = CotizacionesClienteNavigate();
 
     const getInitials = (nombre) => {
         return nombre?.charAt(0)?.toUpperCase() || 'U';
@@ -22,22 +29,24 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             if (isOpen && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
                 toggleSidebar();
             }
-        };
+        }
 
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
-        };
+        }
     }, [isOpen, toggleSidebar]);
 
     const clientSections = [
-
+        { text: 'Gestión de Perfil', icon: <User />, action: handleUsuariosCliente },
+        { text: 'Cotizaciones', icon: <FaFileInvoiceDollar />, action: handleCotizacionesCliente },
     ]
 
     const adminSections = [
         { text: 'Gestión de Usuarios', icon: <User />, action: handleUsuariosAdmin },
         { text: 'Gestión de Productos', icon: <Box />, action: handleProductosAdmin },
+        { text: 'Gestión de Cotizaciones', icon: <FaFileInvoiceDollar />, action: handleCotizacionesAdmin },
     ]
 
     const sections = usuario?.role === 'ADMIN' ? adminSections : clientSections;
@@ -46,7 +55,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <>
             <aside ref={sidebarRef} className={`sidebar ${isOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
-                    <h2>{usuario?.role === 'ADMIN' ? 'Admin InnovaQ' : 'Mi Cuenta'}</h2>
+                    <h2>{usuario?.role === 'ADMIN' ? 'Admin ASEMED' : 'Mi Cuenta'}</h2>
                     <button onClick={toggleSidebar} aria-label="Toggle sidebar">
                         <ChevronLeft />
                     </button>

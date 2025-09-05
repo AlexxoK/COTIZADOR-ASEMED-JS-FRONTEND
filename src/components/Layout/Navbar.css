@@ -6,7 +6,6 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #0F2D54;
-    /* Borde más sutil */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     position: sticky;
     top: 0;

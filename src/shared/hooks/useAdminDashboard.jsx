@@ -19,7 +19,7 @@ export const useAdminDashboardHook = () => {
                 title: 'Error',
                 text: backendError?.error || backendError?.msg || 'Error',
                 icon: 'error'
-            });
+            })
         } finally {
             setLoading(false);
         }

@@ -4,7 +4,10 @@ import Login from "../../components/Auth/Login.jsx"
 import Register from "../../components/Auth/Register.jsx"
 import Dashboard from "../../components/Dashboard/Dashboard.jsx"
 import AdminUsuarios from "../../components/Usuarios/AdminUsuarios.jsx"
+import ClienteUsuarios from "../../components/Usuarios/ClienteUsuarios.jsx"
 import AdminProductos from "../../components/Productos/AdminProductos.jsx"
+import AdminCotizaciones from "../../components/Cotizaciones/AdminCotizaciones.jsx"
+import ClienteCotizaciones from "../../components/Cotizaciones/ClienteCotizaciones.jsx"
 
 const AppRoutes = () => {
     const routes = useRoutes([
@@ -26,10 +29,32 @@ const AppRoutes = () => {
                 </PrivateRoutes>
             )
         },
+
+        {
+            path: "/ClienteUsuarios", element: (
+                <PrivateRoutes roles={['CLIENTE']}>
+                    <ClienteUsuarios />
+                </PrivateRoutes>
+            )
+        },
         {
             path: "/AdminProductos", element: (
                 <PrivateRoutes roles={['ADMIN']}>
                     <AdminProductos />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/AdminCotizaciones", element: (
+                <PrivateRoutes roles={['ADMIN']}>
+                    <AdminCotizaciones />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/ClienteCotizaciones", element: (
+                <PrivateRoutes roles={['CLIENTE']}>
+                    <ClienteCotizaciones />
                 </PrivateRoutes>
             )
         },

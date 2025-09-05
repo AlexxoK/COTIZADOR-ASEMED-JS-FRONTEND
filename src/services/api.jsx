@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3000/cotizador/v1/',
+    baseURL: 'https://cotizador-asemed-js.vercel.app/cotizador/v1/',
     timeout: 10000,
 
 })
@@ -39,6 +39,10 @@ export const traerUsuarios = async () => {
     return await apiClient.get('usuarios/traerUsuarios')
 }
 
+export const traerUsuarioLogueado = async () => {
+    return await apiClient.get('usuarios/traerUsuarioLogueado')
+}
+
 export const actualizarUsuario = async (id, data) => {
     return await apiClient.put(`usuarios/actualizarUsuario/${id}`, data)
 }
@@ -57,4 +61,16 @@ export const actualizarProducto = async (id, data) => {
 
 export const eliminarProducto = async (id) => {
     return await apiClient.delete(`productos/eliminarProducto/${id}`)
+}
+
+export const crearCotizacion = async (data) => {
+    return await apiClient.post('cotizaciones/crearCotizacion', data)
+}
+
+export const traerCotizaciones = async () => {
+    return await apiClient.get('cotizaciones/traerCotizaciones')
+}
+
+export const actualizarEstadoCotizacion = async (id, estado) => {
+    return await apiClient.put(`cotizaciones/actualizarEstadoCotizacion/${id}`, estado)
 }
