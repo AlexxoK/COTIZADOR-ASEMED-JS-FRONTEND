@@ -3,6 +3,7 @@ import { Menu, LogOut, Cross } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useLogout as logoutHandler } from '../../shared/hooks/useLogout';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ toggleSidebar }) => {
     const navigate = useNavigate();
@@ -57,10 +58,10 @@ const Navbar = ({ toggleSidebar }) => {
                     <Menu />
                 </button>
 
-                <a href="/" className="navbar-logo-link">
+                <Link to="/dashboard" className="navbar-logo-link">
                     <Cross />
                     <span>{usuario?.role === 'ADMIN' ? 'ASEMED | Administración' : 'ASEMED'}</span>
-                </a>
+                </Link>
             </div>
 
             <div>
