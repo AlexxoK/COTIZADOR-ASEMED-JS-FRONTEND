@@ -13,7 +13,7 @@ const RegisterForm = () => {
         correo: "",
         password: "",
         phone: "",
-        nit: "",
+        nit: "C/F",
         role: "CLIENTE",
     })
 
@@ -47,7 +47,7 @@ const RegisterForm = () => {
                 correo: "",
                 password: "",
                 phone: "",
-                nit: "",
+                nit: "C/F",
                 role: "CLIENTE",
             })
 
