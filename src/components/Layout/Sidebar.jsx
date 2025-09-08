@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Box, User, FileInvoice } from 'lucide-react';
+import { ChevronLeft, Box, User, File } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import './Sidebar.css';
 import { UsuariosAdminNavigate } from "../../shared/hooks/useDashboard";
@@ -39,13 +39,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
     const clientSections = [
         { text: 'Gestión de Perfil', icon: <User />, action: handleUsuariosCliente },
-        { text: 'Cotizaciones', icon: <FileInvoice />, action: handleCotizacionesCliente },
+        { text: 'Cotizaciones', icon: <File />, action: handleCotizacionesCliente },
     ]
 
     const adminSections = [
         { text: 'Gestión de Usuarios', icon: <User />, action: handleUsuariosAdmin },
         { text: 'Gestión de Productos', icon: <Box />, action: handleProductosAdmin },
-        { text: 'Gestión de Cotizaciones', icon: <FileInvoice />, action: handleCotizacionesAdmin },
+        { text: 'Gestión de Cotizaciones', icon: <File />, action: handleCotizacionesAdmin },
     ]
 
     const sections = usuario?.role === 'ADMIN' ? adminSections : clientSections;
