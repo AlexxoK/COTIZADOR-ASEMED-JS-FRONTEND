@@ -3,77 +3,99 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #1f2937;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6, #06b6d4);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .register-box {
-    background: #2d3748;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
-    color: white;
+    max-width: 420px;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.register-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.register-box::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 4px;
 }
 
 .register-box h2 {
-    text-align: center;
     margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3a8a;
 }
 
 .register-box label {
     display: block;
+    text-align: left;
     margin-top: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #1e40af;
 }
 
 .register-box input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    border: 2px solid #93c5fd;
     border-radius: 8px;
-    border: none;
     outline: none;
-    font-size: 16px;
-    margin-bottom: 5px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.register-box input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
 }
 
 .register-box button {
+    margin-top: 25px;
     width: 100%;
     padding: 12px;
-    margin-top: 20px;
-    background-color: #3b82f6;
+    background: linear-gradient(90deg, #2563eb, #0ea5e9);
+    border: none;
+    border-radius: 8px;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.2s, background 0.3s;
 }
 
 .register-box button:hover {
-    background-color: #2563eb;
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #1d4ed8, #0284c7);
 }
 
 .register-box button:disabled {
-    background-color: #60a5fa;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
 .login-link {
-    text-align: center;
-    margin-top: 15px;
-    color: #e2e8f0;
+    margin-top: 20px;
     font-size: 14px;
+    color: #374151;
 }
 
 .login-link span {
-    color: #3b82f6;
+    color: #2563eb;
+    font-weight: bold;
     cursor: pointer;
-    text-decoration: underline;
+    transition: color 0.3s;
 }
 
 .login-link span:hover {
-    color: #2563eb;
+    color: #1e40af;
 }

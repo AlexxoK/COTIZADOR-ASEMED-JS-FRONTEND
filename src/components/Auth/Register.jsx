@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/api";
 import Swal from "sweetalert2";
-import './Register.css';
+import "./Register.css";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -13,15 +13,16 @@ const RegisterForm = () => {
         correo: "",
         password: "",
         phone: "",
-        role: "CLIENTE"
+        nit: "",
+        role: "CLIENTE",
     })
 
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         }))
     }
 
@@ -35,8 +36,8 @@ const RegisterForm = () => {
                 icon: "success",
                 title: "Registro exitoso",
                 text: "Bienvenido a ASEMED!",
-                background: '#1f2937',
-                color: 'white',
+                background: "#1f2937",
+                color: "white",
             })
 
             setFormData({
@@ -46,18 +47,22 @@ const RegisterForm = () => {
                 correo: "",
                 password: "",
                 phone: "",
-                role: "CLIENTE"
+                nit: "",
+                role: "CLIENTE",
             })
 
             navigate("/");
         } catch (error) {
-            const errorMsg = error.response?.data?.error || error.response?.data?.msg || "Ocurrió un error inesperado";
+            const errorMsg =
+                error.response?.data?.error ||
+                error.response?.data?.msg ||
+                "Ocurrió un error inesperado";
             Swal.fire({
                 icon: "error",
                 title: "Error al registrarse",
                 text: errorMsg,
-                background: '#1f2937',
-                color: 'white',
+                background: "#1f2937",
+                color: "white",
             })
         } finally {
             setIsLoading(false);
@@ -70,25 +75,79 @@ const RegisterForm = () => {
                 <h2>Crear Cuenta</h2>
                 <form onSubmit={handleSubmit}>
                     <label>Nombre</label>
-                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Escribe tu nombre" required maxLength={25} />
+                    <input
+                        type="text"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        placeholder="Escribe tu nombre"
+                        required
+                        maxLength={25}
+                    />
 
                     <label>Apellido</label>
-                    <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} placeholder="Escribe tu apellido" required maxLength={25} />
+                    <input
+                        type="text"
+                        name="apellido"
+                        value={formData.apellido}
+                        onChange={handleChange}
+                        placeholder="Escribe tu apellido"
+                        required
+                        maxLength={25}
+                    />
 
-                    <label>Username</label>
-                    <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Escribe tu usuario" required />
+                    <label>Usuario</label>
+                    <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="Escribe tu usuario"
+                        required
+                    />
 
                     <label>Correo</label>
-                    <input type="email" name="correo" value={formData.correo} onChange={handleChange} placeholder="Escribe tu correo con @" required />
+                    <input
+                        type="email"
+                        name="correo"
+                        value={formData.correo}
+                        onChange={handleChange}
+                        placeholder="usuario@correo.com"
+                        required
+                    />
 
                     <label>Teléfono</label>
-                    <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Escribe tu teléfono" required minLength={8} maxLength={8} />
+                    <input
+                        type="text"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Escribe tu teléfono"
+                        required
+                        minLength={8}
+                        maxLength={8}
+                    />
 
                     <label>Contraseña</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Escribe tu contraseña" required minLength={8} />
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Escribe tu contraseña"
+                        required
+                        minLength={8}
+                    />
 
                     <label>NIT</label>
-                    <input type="text" name="nit" value={formData.nit} onChange={handleChange} placeholder="Escribe tu NIT o C/F" maxLength={9} />
+                    <input
+                        type="text"
+                        name="nit"
+                        value={formData.nit}
+                        onChange={handleChange}
+                        placeholder="Escribe tu NIT o C/F"
+                        maxLength={9}
+                    />
 
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? "Registrando..." : "Registrarse"}

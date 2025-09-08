@@ -1,145 +1,170 @@
 .admC-main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #f9fafb;
-    border-radius: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #111827;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    background: #f4f7fb;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
 }
 
 .admC-title {
-    font-size: 32px;
-    margin-bottom: 40px;
-    color: #1e293b;
-    text-align: center;
+    font-size: 26px;
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0f172a;
 }
 
-.admC-title::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    margin: 8px auto 0;
-    border-radius: 2px;
-}
 
 .admC-message {
-    font-size: 1rem;
     text-align: center;
-    margin: 1rem 0;
-    color: #6b7280;
+    font-size: 16px;
+    color: #64748b;
+    margin-top: 30px;
 }
 
 .admC-cotizaciones-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 22px;
 }
 
 .admC-cotizacion {
-    border: 1px solid #d1d5db;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .admC-cotizacion:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    border-color: #2563eb;
+    transform: translateY(-3px);
 }
 
 .admC-cotizacion-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 0.5rem;
-    color: #374151;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #334155;
 }
 
 .admC-cotizacion-header strong {
-    color: #2563eb;
+    color: #1e3a8a;
+}
+
+.admC-estado {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.admC-estado.pendiente {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.admC-estado.confirmada {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.admC-estado.cancelada {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 .admC-productos-list {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
 }
 
 .admC-producto-item {
-    display: grid;
-    grid-template-columns: 80px 1fr 80px;
+    display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid #f3f4f6;
-    transition: background 0.2s;
-}
-
-.admC-producto-item:hover {
+    gap: 12px;
     background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
 }
 
 .admC-producto-img {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    border-radius: 8px;
-    padding: 4px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
 }
 
 .admC-producto-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.9rem;
-    color: #374151;
+    font-size: 14px;
+    flex: 1;
 }
 
 .admC-producto-nombre {
-    font-weight: bold;
-    margin-bottom: 0.2rem;
-    color: #111827;
+    font-weight: 600;
+    color: #1e3a8a;
 }
 
 .admC-producto-subtotal {
-    font-weight: bold;
-    color: #059669;
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 13px;
+}
+
+.admC-toggle-desc-btn {
+    display: inline-block;
+    font-size: 13px;
+    color: #2563eb;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 5px;
+    transition: color 0.2s ease;
+}
+
+.admC-toggle-desc-btn:hover {
+    color: #1e40af;
 }
 
 .admC-total {
     text-align: right;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 1.2rem;
-    padding-top: 0.8rem;
-    border-top: 2px solid #e5e7eb;
-    color: #dc2626;
-}
-
-.admC-estado {
-    font-size: 0.9rem;
+    margin-top: 12px;
+    font-size: 15px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: #0f172a;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 8px;
 }
 
-.admC-estado.confirmada {
-    color: #059669;
+.admC-main a {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background: #0ea5e9;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
 }
 
-.admC-estado.pendiente {
-    color: #ca8a04;
-}
-
-.admC-estado.cancelada {
-    color: #dc2626;
+.admC-main a:hover {
+    background: #0284c7;
 }

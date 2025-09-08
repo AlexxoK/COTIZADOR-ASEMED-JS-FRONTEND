@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../shared/hooks/useLogin";
 import Swal from "sweetalert2";
-import './Login.css';
+import "./Login.css";
 
 const LoginForm = () => {
     const { handleLogin } = useLogin();
@@ -19,28 +19,31 @@ const LoginForm = () => {
             await handleLogin(correo, password);
 
             await Swal.fire({
-                icon: 'success',
-                title: 'Inicio de sesión exitoso!',
-                text: 'Bienvenido a ASEMED!',
-                background: '#1f2937',
-                color: 'white',
+                icon: "success",
+                title: "Inicio de sesión exitoso!",
+                text: "Bienvenido a ASEMED!",
+                background: "#1f2937",
+                color: "white",
                 timer: 2000,
                 showConfirmButton: false,
                 didOpen: () => {
                     Swal.showLoading();
-                }
+                },
             })
 
             navigate("/dashboard");
         } catch (error) {
-            const errorMsg = error.response?.data?.error || error.response?.data?.msg || 'Ocurrió un error inesperado';
+            const errorMsg =
+                error.response?.data?.error ||
+                error.response?.data?.msg ||
+                "Ocurrió un error inesperado";
             Swal.fire({
-                icon: 'error',
-                title: 'Error al iniciar sesión',
+                icon: "error",
+                title: "Error al iniciar sesión",
                 text: errorMsg,
-                background: '#1f2937',
-                color: 'white',
-            })
+                background: "#1f2937",
+                color: "white",
+            });
         } finally {
             setIsLoading(false);
         }
