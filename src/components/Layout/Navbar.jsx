@@ -60,7 +60,7 @@ const Navbar = ({ toggleSidebar }) => {
 
                 <Link to="/dashboard" className="navbar-logo-link">
                     <Cross />
-                    <span>{usuario?.role === 'ADMIN' ? 'ASEMED | Administración' : 'ASEMED'}</span>
+                    <span>{usuario?.role === 'ADMIN' ? 'ASEMED | Admin' : 'ASEMED'}</span>
                 </Link>
             </div>
 
