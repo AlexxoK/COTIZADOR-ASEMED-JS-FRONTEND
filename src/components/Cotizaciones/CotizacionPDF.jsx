@@ -295,6 +295,10 @@ const CotizacionPDF = ({ cotizacion }) => {
                         <Text style={styles.infoValue}>{cotizacion.cliente.nit || 'C/F'}</Text>
                     </View>
                     <View style={styles.infoRow}>
+                        <Text style={styles.infoLabel}>teléfono:</Text>
+                        <Text style={styles.infoValue}>{cotizacion.cliente.phone || 'N/A'}</Text>
+                    </View>
+                    <View style={styles.infoRow}>
                         <Text style={styles.infoLabel}>Correo:</Text>
                         <Text style={styles.infoValue}>{cotizacion.cliente.correo || 'N/A'}</Text>
                     </View>
