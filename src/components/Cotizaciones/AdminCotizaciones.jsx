@@ -7,6 +7,8 @@ import "./AdminCotizaciones.css";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import CotizacionPDF from './CotizacionPDF';
 
+import { generarExcelCotizacion } from "./CotizacionExcel";
+
 const AdminCotizaciones = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { cotizaciones, loading, handleActualizarEstadoCotizacion } = useCotizaciones();
@@ -123,6 +125,14 @@ const AdminCotizaciones = () => {
                                         >
                                             {({ loading }) => loading ? 'Generando PDF...' : 'Descargar PDF'}
                                         </PDFDownloadLink>
+
+                                        <button
+                                            onClick={() => generarExcelCotizacion(cotizacion)}
+                                            className="adm-excel-btn"
+                                        >
+                                            Descargar Excel
+                                        </button>
+
                                     </div>
                                 </li>
                             )

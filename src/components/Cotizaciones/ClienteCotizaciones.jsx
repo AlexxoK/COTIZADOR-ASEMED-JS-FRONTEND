@@ -22,19 +22,6 @@ const ClienteCotizaciones = () => {
         }))
     }
 
-    const getEstadoClass = (estado) => {
-        switch (estado) {
-            case "CONFIRMADA":
-                return "clt-estado confirmada";
-            case "PENDIENTE":
-                return "clt-estado pendiente";
-            case "CANCELADA":
-                return "clt-estado cancelada";
-            default:
-                return "clt-estado";
-        }
-    }
-
     return (
         <div>
             <Navbar toggleSidebar={toggleSidebar} />
@@ -68,9 +55,6 @@ const ClienteCotizaciones = () => {
                                         <span>
                                             <strong>Fecha:</strong>{" "}
                                             {new Date(cotizacion.createdAt).toLocaleDateString()}
-                                        </span>
-                                        <span className={getEstadoClass(cotizacion.estado)}>
-                                            {cotizacion.estado}
                                         </span>
                                     </div>
 

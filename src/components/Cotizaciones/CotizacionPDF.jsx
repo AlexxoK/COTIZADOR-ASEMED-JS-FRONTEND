@@ -282,7 +282,7 @@ const CotizacionPDF = ({ cotizacion }) => {
                 </View>
 
                 <View style={styles.titleSection}>
-                    <Text style={styles.title}>ACCESORIOS, SUMINISTROS Y EQUIPO MÉDICO</Text>
+                    <Text style={styles.title}>ACCESORIOS, SUMINISTROS Y EQUIPO MÉDICO - ASEMED</Text>
                 </View>
 
                 <View style={styles.clientInfo}>
@@ -313,14 +313,21 @@ const CotizacionPDF = ({ cotizacion }) => {
                 <View style={styles.table}>
                     <View style={styles.tableRow}>
                         <Text style={styles.tableColHeaderCantidad}>CANTIDAD</Text>
-                        <Text style={styles.tableColHeaderDescription}>DESCRIPCIÓN</Text>
+                        <Text style={styles.tableColHeaderDescription}>PRODUCTO</Text>
                         <Text style={styles.tableColHeaderUnitario}>P/UNITARIO</Text>
                         <Text style={styles.tableColHeaderTotal}>P/TOTAL</Text>
                     </View>
                     {cotizacion.productos.map((item, index) => (
                         <View style={styles.tableRow} key={index}>
                             <Text style={styles.tableColCantidad}>{item.cantidad}</Text>
-                            <Text style={styles.tableColDescription}>{item.producto.nombre}</Text>
+                            <View style={styles.tableColDescription}>
+                                <Text style={{ fontWeight: 'bold' }}>{item.producto.nombre}</Text>
+                                {item.producto.descripcion && (
+                                    <Text style={{ fontSize: 6, color: '#555', marginTop: 2 }}>
+                                        {item.producto.descripcion}
+                                    </Text>
+                                )}
+                            </View>
                             <Text style={styles.tableColUnitario}>Q{item.producto.precio.toFixed(2)}</Text>
                             <Text style={styles.tableColTotal}>Q{(item.producto.precio * item.cantidad).toFixed(2)}</Text>
                         </View>
