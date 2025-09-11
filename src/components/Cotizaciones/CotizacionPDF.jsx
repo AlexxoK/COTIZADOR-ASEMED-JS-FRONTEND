@@ -281,10 +281,6 @@ const CotizacionPDF = ({ cotizacion }) => {
                     </View>
                 </View>
 
-                <View style={styles.titleSection}>
-                    <Text style={styles.title}>ACCESORIOS, SUMINISTROS Y EQUIPO MÉDICO - ASEMED</Text>
-                </View>
-
                 <View style={styles.clientInfo}>
                     <View style={styles.infoRow}>
                         <Text style={styles.infoLabel}>Señores:</Text>
