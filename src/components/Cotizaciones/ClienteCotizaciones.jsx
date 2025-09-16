@@ -110,7 +110,7 @@ const ClienteCotizaciones = () => {
                                         </PDFDownloadLink>
                                     </div>
                                 </li>
-                            );
+                            )
                         })}
                     </ul>
                 )}
