@@ -25,7 +25,8 @@
 .adm-producto-card img.adm-producto-imagen {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #fff;
     border-radius: 12px;
 }
 
