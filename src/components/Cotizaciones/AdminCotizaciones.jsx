@@ -121,7 +121,7 @@ const AdminCotizaciones = () => {
                                     <div style={{ marginTop: '10px', textAlign: 'right' }}>
                                         <PDFDownloadLink
                                             document={<CotizacionPDF cotizacion={cotizacion} />}
-                                            fileName={`cotizacion-${cotizacion._id}.pdf`}
+                                            fileName={`Cotización de ${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}.pdf`}
                                         >
                                             {({ loading }) => loading ? 'Generando PDF...' : 'Descargar PDF'}
                                         </PDFDownloadLink>

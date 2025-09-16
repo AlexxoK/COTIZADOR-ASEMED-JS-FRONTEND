@@ -102,7 +102,7 @@ const ClienteCotizaciones = () => {
                                     <div style={{ marginTop: '10px', textAlign: 'right' }}>
                                         <PDFDownloadLink
                                             document={<CotizacionPDF cotizacion={cotizacion} />}
-                                            fileName={`cotizacion-${cotizacion._id}.pdf`}
+                                            fileName={`Cotización de ${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}.pdf`}
                                         >
                                             {({ blob, url, loading, error }) =>
                                                 loading ? 'Generando PDF...' : 'Descargar PDF'
