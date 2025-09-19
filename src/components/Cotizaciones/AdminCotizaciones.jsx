@@ -73,9 +73,9 @@ const AdminCotizaciones = () => {
                                                 handleActualizarEstadoCotizacion(cotizacion._id, e.target.value)
                                             }
                                         >
-                                            <option value="COTIZACIÓN">Pendiente</option>
-                                            <option value="PEDIDO">Confirmada</option>
-                                            <option value="CANCELADO">Cancelada</option>
+                                            <option value="COTIZACIÓN">Cotización</option>
+                                            <option value="PEDIDO">Pedido</option>
+                                            <option value="CANCELADO">Cancelado</option>
                                         </select>
                                     </div>
 
