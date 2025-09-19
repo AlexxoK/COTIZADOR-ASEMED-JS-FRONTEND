@@ -26,9 +26,9 @@ const AdminCotizaciones = () => {
 
     const getEstadoClass = (estado) => {
         switch (estado) {
-            case "CONFIRMADA": return "admC-estado confirmada";
-            case "PENDIENTE": return "admC-estado pendiente";
-            case "CANCELADA": return "admC-estado cancelada";
+            case "PEDIDO": return "admC-estado confirmada";
+            case "COTIZACIÓN": return "admC-estado pendiente";
+            case "CANCELADO": return "admC-estado cancelada";
             default: return "admC-estado";
         }
     }
@@ -73,9 +73,9 @@ const AdminCotizaciones = () => {
                                                 handleActualizarEstadoCotizacion(cotizacion._id, e.target.value)
                                             }
                                         >
-                                            <option value="PENDIENTE">Pendiente</option>
-                                            <option value="CONFIRMADA">Confirmada</option>
-                                            <option value="CANCELADA">Cancelada</option>
+                                            <option value="COTIZACIÓN">Pendiente</option>
+                                            <option value="PEDIDO">Confirmada</option>
+                                            <option value="CANCELADO">Cancelada</option>
                                         </select>
                                     </div>
 
