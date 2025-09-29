@@ -31,9 +31,25 @@ const styles = StyleSheet.create({
     totalAmount: { fontSize: 10, fontWeight: 'bold', color: '#d60000' },
     totalInWords: { marginBottom: 10, fontSize: 8, color: '#004aad', fontWeight: 'bold' },
 
-    terms: { marginBottom: 10 },
+    terms: { marginBottom: 30 },
     termsTitle: { fontWeight: 'bold', marginBottom: 3, fontSize: 8, color: '#d60000' },
     termItem: { marginLeft: 10, marginBottom: 1, fontSize: 7, color: '#000' },
+
+    signatureSection: {
+        marginTop: 30,
+        alignItems: 'center',
+        textAlign: 'center',
+    },
+    signatureText: {
+        fontSize: 10,
+        marginBottom: 12,
+    },
+    signatureTextSmall: {
+        fontSize: 9,
+    },
+    signatureTextBold: {
+        fontSize: 10
+    },
 
     footer: { borderTop: '1px solid #ccc', paddingTop: 5, textAlign: 'center', fontSize: 6, marginTop: 'auto', color: '#000' },
     footerText: { marginBottom: 2 },
@@ -62,14 +78,14 @@ const numeroALetras = (num) => {
         if (n > 15 && n < 20) return `DIECI${unidades[n % 10]}`;
         if (n % 10 === 0) return decenas[Math.floor(n / 10)];
         return `${decenas[Math.floor(n / 10)]} Y ${unidades[n % 10]}`;
-    }
+    };
 
     const getCentenas = (n) => {
         if (n === 100) return 'CIEN';
         if (n < 100) return getUnidades(n);
         if (n % 100 === 0) return centenas[Math.floor(n / 100)];
         return `${centenas[Math.floor(n / 100)]} ${getUnidades(n % 100)}`;
-    }
+    };
 
     if (enteros >= 1000000) {
         const millones = Math.floor(enteros / 1000000);
@@ -109,7 +125,7 @@ const CotizacionPDF = ({ cotizacion }) => {
     return (
         <Document>
             {productosPorPagina.map((productosChunk, pageIndex) => (
-                <Page key={pageIndex} size="A4" style={styles.page}>
+                <Page key={pageIndex} size="LETTER" style={styles.page}>
                     <View style={styles.header}>
                         <Image src="/images/logo-asemed-guatemala.jpg" style={styles.logo} />
                         <View style={styles.address}>
@@ -179,7 +195,7 @@ const CotizacionPDF = ({ cotizacion }) => {
                     </View>
 
                     {pageIndex === productosPorPagina.length - 1 && (
-                        <>
+                        <View wrap={false} style={{ break: 'avoid' }}>
                             <View style={styles.totalSection}>
                                 <View style={styles.totalBox}>
                                     <Text style={styles.totalText}>
@@ -202,7 +218,13 @@ const CotizacionPDF = ({ cotizacion }) => {
                                 <Text style={styles.termItem}>• Envío a domicilio GRATIS dentro del perímetro de la capital por compras mínimas de Q200.00</Text>
                                 <Text style={styles.termItem}>• Envío al interior se realiza por medio de transporte (cliente cubre costo del envío)</Text>
                             </View>
-                        </>
+
+                            <View style={styles.signatureSection}>
+                                <Text style={styles.signatureText}>Atentamente</Text>
+                                <Text style={styles.signatureTextSmall}>{"\n\n"}Departamento de ventas</Text>
+                                <Text style={styles.signatureTextBold}>ASEMED</Text>
+                            </View>
+                        </View>
                     )}
 
                     <View style={styles.footer} fixed>
