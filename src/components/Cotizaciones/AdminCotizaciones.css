@@ -190,3 +190,39 @@
 .adm-excel-btn:active {
     transform: scale(0.95);
 }
+
+.admC-vendedor-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.admC-vendedor-label {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.admC-vendedor-input {
+    width: 250px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+}
+
+.admC-vendedor-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+}
+
+@media (max-width: 600px) {
+    .admC-vendedor-input {
+        width: 100%;
+    }
+}

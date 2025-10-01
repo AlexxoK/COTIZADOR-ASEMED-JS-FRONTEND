@@ -40,13 +40,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
     },
+    
     signatureText: {
         fontSize: 10,
         marginBottom: 12,
     },
+
     signatureTextSmall: {
         fontSize: 9,
     },
+
     signatureTextBold: {
         fontSize: 10
     },
@@ -78,14 +81,14 @@ const numeroALetras = (num) => {
         if (n > 15 && n < 20) return `DIECI${unidades[n % 10]}`;
         if (n % 10 === 0) return decenas[Math.floor(n / 10)];
         return `${decenas[Math.floor(n / 10)]} Y ${unidades[n % 10]}`;
-    };
+    }
 
     const getCentenas = (n) => {
         if (n === 100) return 'CIEN';
         if (n < 100) return getUnidades(n);
         if (n % 100 === 0) return centenas[Math.floor(n / 100)];
         return `${centenas[Math.floor(n / 100)]} ${getUnidades(n % 100)}`;
-    };
+    }
 
     if (enteros >= 1000000) {
         const millones = Math.floor(enteros / 1000000);
@@ -113,7 +116,7 @@ const chunkArray = (arr, size) => {
     return chunks;
 }
 
-const CotizacionPDF = ({ cotizacion }) => {
+const CotizacionPDF = ({ cotizacion, vendedorNombre }) => {
     const today = new Date().toLocaleDateString('es-GT', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const totalCotizacion = cotizacion.productos.reduce(
         (acc, { producto, cantidad }) => acc + producto.precio * cantidad,
@@ -214,14 +217,15 @@ const CotizacionPDF = ({ cotizacion }) => {
                                 <Text style={styles.termItem}>• Tiempo de entrega: 1 a 2 días hábiles después de validar pago</Text>
                                 <Text style={styles.termItem}>• Sostenimiento de oferta: 30 días</Text>
                                 <Text style={styles.termItem}>• Imágenes con fines ilustrativos, el producto final puede variar</Text>
-                                <Text style={styles.termItem}>• Productos sujetos a existencia y/o previa venta, precios pueden variar sin previo aviso</Text>
+                                <Text style={styles.termItem}>• PRODUCTOS SUJETOS A EXISTENCIA Y/O PREVIA VENTA, PRECIOS PUEDEN VARIAR SIN PREVIO AVISO</Text>
                                 <Text style={styles.termItem}>• Envío a domicilio GRATIS dentro del perímetro de la capital por compras mínimas de Q200.00</Text>
                                 <Text style={styles.termItem}>• Envío al interior se realiza por medio de transporte (cliente cubre costo del envío)</Text>
                             </View>
 
                             <View style={styles.signatureSection}>
                                 <Text style={styles.signatureText}>Atentamente</Text>
-                                <Text style={styles.signatureTextSmall}>{"\n\n"}Departamento de ventas</Text>
+                                <Text style={styles.signatureText}>{vendedorNombre || "________________"}</Text>
+                                <Text style={styles.signatureTextSmall}>Departamento de ventas</Text>
                                 <Text style={styles.signatureTextBold}>ASEMED</Text>
                             </View>
                         </View>

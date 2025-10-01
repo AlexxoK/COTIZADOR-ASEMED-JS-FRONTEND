@@ -14,6 +14,7 @@ const AdminCotizaciones = () => {
     const { cotizaciones, loading, handleActualizarEstadoCotizacion } = useCotizaciones();
 
     const [expandedCotizaciones, setExpandedCotizaciones] = useState({});
+    const [vendedoresNombres, setVendedoresNombres] = useState({});
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -31,6 +32,13 @@ const AdminCotizaciones = () => {
             case "CANCELADO": return "admC-estado cancelada";
             default: return "admC-estado";
         }
+    }
+
+    const handleVendedorChange = (id, nombre) => {
+        setVendedoresNombres(prev => ({
+            ...prev,
+            [id]: nombre
+        }));
     }
 
     return (
@@ -118,9 +126,21 @@ const AdminCotizaciones = () => {
                                         )}
                                     </div>
 
+                                    <div className="admC-vendedor-container">
+                                        <label className="admC-vendedor-label">Nombre del vendedor:</label>
+                                        <input
+                                            type="text"
+                                            value={vendedoresNombres[cotizacion._id] || ""}
+                                            onChange={(e) => handleVendedorChange(cotizacion._id, e.target.value)}
+                                            placeholder="Nombre del vendedor"
+                                            className="admC-vendedor-input"
+                                        />
+                                    </div>
+
+
                                     <div style={{ marginTop: '10px', textAlign: 'right' }}>
                                         <PDFDownloadLink
-                                            document={<CotizacionPDF cotizacion={cotizacion} />}
+                                            document={<CotizacionPDF cotizacion={cotizacion} vendedorNombre={vendedoresNombres[cotizacion._id]} />}
                                             fileName={`Cotización de ${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}.pdf`}
                                         >
                                             {({ loading }) => loading ? 'Generando PDF...' : 'Descargar PDF'}
@@ -132,7 +152,6 @@ const AdminCotizaciones = () => {
                                         >
                                             Descargar Excel
                                         </button>
-
                                     </div>
                                 </li>
                             )
