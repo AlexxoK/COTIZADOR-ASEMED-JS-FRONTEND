@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     totalAmount: { fontSize: 10, fontWeight: 'bold', color: '#d60000' },
     totalInWords: { marginBottom: 10, fontSize: 8, color: '#004aad', fontWeight: 'bold' },
 
-    terms: { marginBottom: 30 },
+    terms: { marginBottom: 10 },
     termsTitle: { fontWeight: 'bold', marginBottom: 3, fontSize: 8, color: '#d60000' },
     termItem: { marginLeft: 10, marginBottom: 1, fontSize: 7, color: '#000' },
 
     signatureSection: {
-        marginTop: 30,
+        marginTop: 15,
         alignItems: 'center',
         textAlign: 'center',
     },
