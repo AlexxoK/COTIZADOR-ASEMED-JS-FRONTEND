@@ -4,14 +4,16 @@ import Sidebar from "../Layout/Sidebar";
 import { useCotizaciones } from "../../shared/hooks/useCotizaciones";
 import "./ClienteCotizaciones.css";
 
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import CotizacionPDF from './CotizacionPDF';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import CotizacionPDF from "./CotizacionPDF";
 
 const ClienteCotizaciones = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { cotizaciones, loading } = useCotizaciones();
 
     const [expandedCotizaciones, setExpandedCotizaciones] = useState({});
+    const [vendedoresNombres, setVendedoresNombres] = useState({});
+    const [clientesDatos, setClientesDatos] = useState({});
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -19,6 +21,23 @@ const ClienteCotizaciones = () => {
         setExpandedCotizaciones((prev) => ({
             ...prev,
             [id]: !prev[id],
+        }))
+    }
+
+    const handleVendedorChange = (id, nombre) => {
+        setVendedoresNombres((prev) => ({
+            ...prev,
+            [id]: nombre,
+        }));
+    };
+
+    const handleClienteChange = (id, field, value) => {
+        setClientesDatos((prev) => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                [field]: value,
+            },
         }))
     }
 
@@ -37,20 +56,26 @@ const ClienteCotizaciones = () => {
                 ) : (
                     <ul className="clt-cotizaciones-list">
                         {cotizaciones.map((cotizacion) => {
-                            const isExpanded = expandedCotizaciones[cotizacion._id] || false;
+                            const id = cotizacion._id;
+                            const isExpanded = expandedCotizaciones[id] || false;
                             const productosMostrar = isExpanded
                                 ? cotizacion.productos
                                 : cotizacion.productos.slice(0, 2);
 
+                            const clienteManual = clientesDatos[id] || {};
+
                             return (
-                                <li key={cotizacion._id} className="clt-cotizacion">
+                                <li key={id} className="clt-cotizacion">
                                     <div className="clt-cotizacion-header">
                                         <span>
-                                            <strong>Cliente:</strong> {cotizacion.cliente.nombre}{" "}
-                                            {cotizacion.cliente.apellido}
+                                            <strong>Cliente:</strong>{" "}
+                                            {clienteManual.nombre
+                                                ? clienteManual.nombre
+                                                : `${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}`}
                                         </span>
                                         <span>
-                                            <strong>Correo:</strong> {cotizacion.cliente.correo}
+                                            <strong>Correo:</strong>{" "}
+                                            {clienteManual.correo || cotizacion.cliente.correo}
                                         </span>
                                         <span>
                                             <strong>Fecha:</strong>{" "}
@@ -81,7 +106,7 @@ const ClienteCotizaciones = () => {
                                             <li>
                                                 <button
                                                     className="clt-toggle-desc-btn"
-                                                    onClick={() => toggleExpand(cotizacion._id)}
+                                                    onClick={() => toggleExpand(id)}
                                                 >
                                                     {isExpanded ? "Ver menos" : "Ver más"}
                                                 </button>
@@ -99,18 +124,73 @@ const ClienteCotizaciones = () => {
                                         )}
                                     </div>
 
-                                    <div style={{ marginTop: '10px', textAlign: 'right' }}>
+                                    <div className="clt-vendedor-container">
+                                        <label className="clt-vendedor-label">Nombre del cliente:</label>
+                                        <input
+                                            type="text"
+                                            value={clienteManual.nombre || ""}
+                                            onChange={(e) => handleClienteChange(id, "nombre", e.target.value)}
+                                            placeholder="Nombre del cliente"
+                                            className="clt-vendedor-input"
+                                        />
+
+                                        <label className="clt-vendedor-label">NIT:</label>
+                                        <input
+                                            type="text"
+                                            value={clienteManual.nit || ""}
+                                            onChange={(e) => handleClienteChange(id, "nit", e.target.value)}
+                                            placeholder="NIT del cliente"
+                                            className="clt-vendedor-input"
+                                        />
+
+                                        <label className="clt-vendedor-label">Correo:</label>
+                                        <input
+                                            type="email"
+                                            value={clienteManual.correo || ""}
+                                            onChange={(e) => handleClienteChange(id, "correo", e.target.value)}
+                                            placeholder="Correo del cliente"
+                                            className="clt-vendedor-input"
+                                        />
+
+                                        <label className="clt-vendedor-label">Teléfono:</label>
+                                        <input
+                                            type="text"
+                                            value={clienteManual.telefono || ""}
+                                            onChange={(e) => handleClienteChange(id, "telefono", e.target.value)}
+                                            placeholder="Teléfono del cliente"
+                                            className="clt-vendedor-input"
+                                        />
+                                    </div>
+
+                                    <div className="clt-vendedor-container">
+                                        <label className="clt-vendedor-label">Nombre del vendedor:</label>
+                                        <input
+                                            type="text"
+                                            value={vendedoresNombres[id] || ""}
+                                            onChange={(e) => handleVendedorChange(id, e.target.value)}
+                                            placeholder="Nombre del vendedor"
+                                            className="clt-vendedor-input"
+                                        />
+                                    </div>
+
+                                    <div style={{ marginTop: "10px", textAlign: "right" }}>
                                         <PDFDownloadLink
-                                            document={<CotizacionPDF cotizacion={cotizacion} />}
-                                            fileName={`Cotización de ${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}.pdf`}
+                                            document={
+                                                <CotizacionPDF
+                                                    cotizacion={cotizacion}
+                                                    vendedorNombre={vendedoresNombres[id]}
+                                                    clienteInfo={clienteManual}
+                                                />
+                                            }
+                                            fileName={`Cotización de ${clienteManual.nombre || "cliente"}.pdf`}
                                         >
-                                            {({ blob, url, loading, error }) =>
-                                                loading ? 'Generando PDF...' : 'Descargar PDF'
+                                            {({ loading }) =>
+                                                loading ? "Generando PDF..." : "Descargar PDF"
                                             }
                                         </PDFDownloadLink>
                                     </div>
                                 </li>
-                            )
+                            );
                         })}
                     </ul>
                 )}

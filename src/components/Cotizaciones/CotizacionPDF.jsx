@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
     },
-    
+
     signatureText: {
         fontSize: 10,
         marginBottom: 12,
@@ -116,7 +116,7 @@ const chunkArray = (arr, size) => {
     return chunks;
 }
 
-const CotizacionPDF = ({ cotizacion, vendedorNombre }) => {
+const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
     const today = new Date().toLocaleDateString('es-GT', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const totalCotizacion = cotizacion.productos.reduce(
         (acc, { producto, cantidad }) => acc + producto.precio * cantidad,
@@ -140,19 +140,19 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre }) => {
                         <View style={styles.clientInfo}>
                             <View style={styles.infoRow}>
                                 <Text style={styles.infoLabel}>Señores:</Text>
-                                <Text style={styles.infoValue}>{cotizacion.cliente.nombre} {cotizacion.cliente.apellido}</Text>
+                                <Text style={styles.infoValue}>{clienteInfo?.nombre || 'Sin nombre'}</Text>
                             </View>
                             <View style={styles.infoRow}>
                                 <Text style={styles.infoLabel}>NIT:</Text>
-                                <Text style={styles.infoValue}>{cotizacion.cliente.nit || 'C/F'}</Text>
+                                <Text style={styles.infoValue}>{clienteInfo?.nit || 'C/F'}</Text>
                             </View>
                             <View style={styles.infoRow}>
                                 <Text style={styles.infoLabel}>Correo:</Text>
-                                <Text style={styles.infoValue}>{cotizacion.cliente.correo || 'N/A'}</Text>
+                                <Text style={styles.infoValue}>{clienteInfo?.correo || 'N/A'}</Text>
                             </View>
                             <View style={styles.infoRow}>
                                 <Text style={styles.infoLabel}>Teléfono:</Text>
-                                <Text style={styles.infoValue}>{cotizacion.cliente.phone || 'N/A'}</Text>
+                                <Text style={styles.infoValue}>{clienteInfo?.telefono || 'N/A'}</Text>
                             </View>
                             <View style={styles.infoRow}>
                                 <Text style={styles.infoLabel}>Notas:</Text>
@@ -162,6 +162,7 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre }) => {
                             </View>
                         </View>
                     )}
+
 
                     <View style={styles.table}>
                         <View style={styles.tableRow}>
