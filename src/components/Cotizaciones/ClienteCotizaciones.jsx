@@ -68,7 +68,7 @@ const ClienteCotizaciones = () => {
                                 <li key={id} className="clt-cotizacion">
                                     <div className="clt-cotizacion-header">
                                         <span>
-                                            <strong>Cliente:</strong>{" "}
+                                            <strong>Vendedor:</strong>{" "}
                                             {clienteManual.nombre
                                                 ? clienteManual.nombre
                                                 : `${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}`}
