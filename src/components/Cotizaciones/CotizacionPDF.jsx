@@ -56,6 +56,25 @@ const styles = StyleSheet.create({
 
     footer: { borderTop: '1px solid #ccc', paddingTop: 5, textAlign: 'center', fontSize: 6, marginTop: 'auto', color: '#000' },
     footerText: { marginBottom: 2 },
+
+    signatureRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        marginTop: 15,
+    },
+
+    signatureImage: {
+        width: 110,
+        height: 55,
+        marginRight: 12,
+        objectFit: 'contain',
+    },
+
+    signatureTextContainer: {
+        textAlign: 'center',
+    },
+
 })
 
 const numeroALetras = (num) => {
@@ -224,11 +243,27 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
                             </View>
 
                             <View style={styles.signatureSection}>
-                                <Text style={styles.signatureText}>Atentamente</Text>
-                                <Text style={styles.signatureText}>{vendedorNombre || "________________"}</Text>
-                                <Text style={styles.signatureTextSmall}>Departamento de ventas</Text>
-                                <Text style={styles.signatureTextBold}>ASEMED</Text>
+                                <View style={styles.signatureRow}>
+                                    <Image
+                                        src="/images/firma-general.png"
+                                        style={styles.signatureImage}
+                                    />
+
+                                    <View style={styles.signatureTextContainer}>
+                                        <Text style={styles.signatureText}>Atentamente</Text>
+                                        <Text style={styles.signatureText}>
+                                            {vendedorNombre || "________________"}
+                                        </Text>
+                                        <Text style={styles.signatureTextSmall}>
+                                            Departamento de ventas
+                                        </Text>
+                                        <Text style={styles.signatureTextBold}>
+                                            ASEMED
+                                        </Text>
+                                    </View>
+                                </View>
                             </View>
+
                         </View>
                     )}
 
