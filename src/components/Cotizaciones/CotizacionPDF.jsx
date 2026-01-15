@@ -44,14 +44,17 @@ const styles = StyleSheet.create({
     signatureText: {
         fontSize: 10,
         marginBottom: 12,
+        textAlign: 'center',
     },
 
     signatureTextSmall: {
         fontSize: 9,
+        textAlign: 'center',
     },
 
     signatureTextBold: {
-        fontSize: 10
+        fontSize: 10,
+        marginBottom: 8,
     },
 
     footer: { borderTop: '1px solid #ccc', paddingTop: 5, textAlign: 'center', fontSize: 6, marginTop: 'auto', color: '#000' },
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     signatureImage: {
         width: 110,
         height: 55,
-        marginRight: 12,
+        marginBottom: 6,
         objectFit: 'contain',
     },
 
@@ -243,25 +246,24 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
                             </View>
 
                             <View style={styles.signatureSection}>
-                                <View style={styles.signatureRow}>
-                                    <Image
-                                        src="/images/firma-general.png"
-                                        style={styles.signatureImage}
-                                    />
+                                <Image
+                                    src="/images/firma-general.png"
+                                    style={styles.signatureImage}
+                                />
 
-                                    <View style={styles.signatureTextContainer}>
-                                        <Text style={styles.signatureText}>Atentamente</Text>
-                                        <Text style={styles.signatureText}>
-                                            {vendedorNombre || "________________"}
-                                        </Text>
-                                        <Text style={styles.signatureTextSmall}>
-                                            Departamento de ventas
-                                        </Text>
-                                        <Text style={styles.signatureTextBold}>
-                                            ASEMED
-                                        </Text>
-                                    </View>
-                                </View>
+                                <Text style={styles.signatureText}>Atentamente</Text>
+
+                                <Text style={styles.signatureText}>
+                                    {vendedorNombre || "________________"}
+                                </Text>
+
+                                <Text style={styles.signatureTextSmall}>
+                                    Departamento de ventas
+                                </Text>
+
+                                <Text style={styles.signatureTextBold}>
+                                    ASEMED
+                                </Text>
                             </View>
 
                         </View>
