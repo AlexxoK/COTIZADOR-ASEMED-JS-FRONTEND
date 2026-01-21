@@ -252,3 +252,25 @@
     color: #94a3b8;
     font-style: italic;
 }
+
+.clt-pdf-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0ea5e9;
+    background: #ffffff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #0ea5e9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clt-pdf-btn:hover {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+.clt-pdf-btn:active {
+    transform: scale(0.97);
+}
