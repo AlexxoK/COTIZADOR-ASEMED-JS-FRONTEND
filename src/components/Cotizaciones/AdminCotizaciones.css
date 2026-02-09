@@ -226,3 +226,26 @@
         width: 100%;
     }
 }
+
+.admC-pdf-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0ea5e9;
+    background: #ffffff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #0ea5e9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+}
+
+.admC-pdf-btn:hover {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+.admC-pdf-btn:active {
+    transform: scale(0.97);
+}

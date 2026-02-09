@@ -6,7 +6,6 @@ import "./AdminCotizaciones.css";
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import CotizacionPDF from './CotizacionPDF';
-
 import { generarExcelCotizacion } from "./CotizacionExcel";
 
 const AdminCotizaciones = () => {
@@ -15,6 +14,7 @@ const AdminCotizaciones = () => {
 
     const [expandedCotizaciones, setExpandedCotizaciones] = useState({});
     const [vendedoresNombres, setVendedoresNombres] = useState({});
+    const [pdfActivoPorCotizacion, setPdfActivoPorCotizacion] = useState({});
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -22,8 +22,8 @@ const AdminCotizaciones = () => {
         setExpandedCotizaciones(prev => ({
             ...prev,
             [id]: !prev[id]
-        }))
-    }
+        }));
+    };
 
     const getEstadoClass = (estado) => {
         switch (estado) {
@@ -32,14 +32,21 @@ const AdminCotizaciones = () => {
             case "CANCELADO": return "admC-estado cancelada";
             default: return "admC-estado";
         }
-    }
+    };
 
     const handleVendedorChange = (id, nombre) => {
         setVendedoresNombres(prev => ({
             ...prev,
             [id]: nombre
         }));
-    }
+    };
+
+    const generarPDF = (id) => {
+        setPdfActivoPorCotizacion(prev => ({
+            ...prev,
+            [id]: true
+        }));
+    };
 
     return (
         <div>
@@ -47,7 +54,7 @@ const AdminCotizaciones = () => {
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
             <main className="admC-main">
-                <h1 className="admC-title">Cotizaciones de Clientes</h1>
+                <h1 className="admC-title">Cotizaciones General</h1>
 
                 {loading ? (
                     <p className="admC-message">Cargando cotizaciones...</p>
@@ -56,16 +63,17 @@ const AdminCotizaciones = () => {
                 ) : (
                     <ul className="admC-cotizaciones-list">
                         {cotizaciones.map((cotizacion) => {
-                            const isExpanded = expandedCotizaciones[cotizacion._id] || false;
+                            const id = cotizacion._id;
+                            const isExpanded = expandedCotizaciones[id] || false;
                             const productosMostrar = isExpanded
                                 ? cotizacion.productos
                                 : cotizacion.productos.slice(0, 2);
 
                             return (
-                                <li key={cotizacion._id} className="admC-cotizacion">
+                                <li key={id} className="admC-cotizacion">
                                     <div className="admC-cotizacion-header">
                                         <span>
-                                            <strong>Cliente:</strong> {cotizacion.cliente?.nombre || "-"} {cotizacion.cliente?.apellido || "-"}
+                                            <strong>Usuario:</strong> {cotizacion.cliente?.nombre || "-"} {cotizacion.cliente?.apellido || "-"}
                                         </span>
                                         <span>
                                             <strong>Correo:</strong> {cotizacion.cliente?.correo || "-"}
@@ -78,7 +86,7 @@ const AdminCotizaciones = () => {
                                             className={getEstadoClass(cotizacion.estado)}
                                             value={cotizacion.estado}
                                             onChange={(e) =>
-                                                handleActualizarEstadoCotizacion(cotizacion._id, e.target.value)
+                                                handleActualizarEstadoCotizacion(id, e.target.value)
                                             }
                                         >
                                             <option value="COTIZACIÓN">Cotización</option>
@@ -95,6 +103,7 @@ const AdminCotizaciones = () => {
                                                         src={producto.imagen}
                                                         alt={producto.nombre}
                                                         className="admC-producto-img"
+                                                        loading="lazy"
                                                     />
                                                 )}
                                                 <div className="admC-producto-info">
@@ -106,11 +115,12 @@ const AdminCotizaciones = () => {
                                                 </div>
                                             </li>
                                         ))}
+
                                         {cotizacion.productos.length > 2 && (
                                             <li>
                                                 <button
                                                     className="admC-toggle-desc-btn"
-                                                    onClick={() => toggleExpand(cotizacion._id)}
+                                                    onClick={() => toggleExpand(id)}
                                                 >
                                                     {isExpanded ? "Ver menos" : "Ver más"}
                                                 </button>
@@ -121,7 +131,8 @@ const AdminCotizaciones = () => {
                                     <div className="admC-total">
                                         <strong>Total:</strong>{" "}
                                         Q{cotizacion.productos.reduce(
-                                            (acc, { producto, cantidad }) => acc + producto.precio * cantidad,
+                                            (acc, { producto, cantidad }) =>
+                                                acc + producto.precio * cantidad,
                                             0
                                         )}
                                     </div>
@@ -130,21 +141,40 @@ const AdminCotizaciones = () => {
                                         <label className="admC-vendedor-label">Nombre del vendedor:</label>
                                         <input
                                             type="text"
-                                            value={vendedoresNombres[cotizacion._id] || ""}
-                                            onChange={(e) => handleVendedorChange(cotizacion._id, e.target.value)}
+                                            value={vendedoresNombres[id] || ""}
+                                            onChange={(e) => handleVendedorChange(id, e.target.value)}
                                             placeholder="Nombre del vendedor"
                                             className="admC-vendedor-input"
                                         />
                                     </div>
 
-
                                     <div style={{ marginTop: '10px', textAlign: 'right' }}>
-                                        <PDFDownloadLink
-                                            document={<CotizacionPDF cotizacion={cotizacion} vendedorNombre={vendedoresNombres[cotizacion._id]} />}
-                                            fileName={`Cotización de ${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}.pdf`}
-                                        >
-                                            {({ loading }) => loading ? 'Generando PDF...' : 'Descargar PDF'}
-                                        </PDFDownloadLink>
+
+                                        {!pdfActivoPorCotizacion[id] && (
+                                            <button
+                                                className="admC-pdf-btn"
+                                                onClick={() => generarPDF(id)}
+                                            >
+                                                Generar PDF
+                                            </button>
+                                        )}
+
+                                        {pdfActivoPorCotizacion[id] && (
+                                            <PDFDownloadLink
+                                                document={
+                                                    <CotizacionPDF
+                                                        cotizacion={cotizacion}
+                                                        vendedorNombre={vendedoresNombres[id]}
+                                                    />
+                                                }
+                                                fileName={`Cotización de ${cotizacion.cliente?.nombre || "cliente"} ${cotizacion.cliente?.apellido || ""}.pdf`}
+                                                className="admC-pdf-link"
+                                            >
+                                                {({ loading }) =>
+                                                    loading ? 'Generando PDF...' : 'Descargar PDF'
+                                                }
+                                            </PDFDownloadLink>
+                                        )}
 
                                         <button
                                             onClick={() => generarExcelCotizacion(cotizacion)}
@@ -152,15 +182,16 @@ const AdminCotizaciones = () => {
                                         >
                                             Descargar Excel
                                         </button>
+
                                     </div>
                                 </li>
-                            )
+                            );
                         })}
                     </ul>
                 )}
             </main>
         </div>
-    )
-}
+    );
+};
 
 export default AdminCotizaciones;
