@@ -12,22 +12,11 @@ const ClienteDashboard = () => {
     const [search, setSearch] = useState("");
     const [searchCategory, setSearchCategory] = useState("");
 
-    const {
-        productosList,
-        carrito,
-        handleTraerProductos,
-        agregarAlCarrito,
-        quitarDelCarrito,
-        cambiarCantidad,
-        cambiarPrecio,
-        calcularTotal,
-        handleCrearCotizacion,
-        loading
-    } = useClienteDashbordHook();
+    const { productosList, carrito, handleTraerProductos, agregarAlCarrito, quitarDelCarrito, cambiarCantidad, calcularTotal, handleCrearCotizacion, loading } = useClienteDashbordHook();
 
     useEffect(() => {
         handleTraerProductos();
-    }, []);
+    }, [])
 
     const filteredProducts = productosList
         .filter(p => !searchCategory || p.categoria?.toLowerCase() === searchCategory.toLowerCase())
@@ -41,8 +30,7 @@ const ClienteDashboard = () => {
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-    const toggleDescription = id =>
-        setExpandedDesc(prev => ({ ...prev, [id]: !prev[id] }));
+    const toggleDescription = id => setExpandedDesc(prev => ({ ...prev, [id]: !prev[id] }));
 
     return (
         <div>
@@ -64,9 +52,7 @@ const ClienteDashboard = () => {
                 <div className="ctl-category-select-container">
                     <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
                         <option value="">-- Elige una categoría --</option>
-                        {categoriasDisponibles.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                        ))}
+                        {categoriasDisponibles.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                     </select>
                 </div>
 
@@ -78,53 +64,27 @@ const ClienteDashboard = () => {
 
                             return (
                                 <li key={p._id} className="ctl-producto-card uniform-card">
-                                    {p.imagen && (
-                                        <img
-                                            src={p.imagen}
-                                            alt={p.nombre}
-                                            className="ctl-producto-imagen"
-                                        />
-                                    )}
+                                    {p.imagen && <img src={p.imagen} alt={p.nombre} className="ctl-producto-imagen" />}
                                     <h3>{p.nombre}</h3>
-
                                     {p.descripcion && (
                                         <p>
-                                            {isExpanded
-                                                ? p.descripcion
-                                                : shortDesc + (p.descripcion.length > 100 ? "..." : "")
-                                            }
+                                            {isExpanded ? p.descripcion : shortDesc + (p.descripcion.length > 100 ? "..." : "")}
                                             {p.descripcion.length > 100 && (
-                                                <button
-                                                    onClick={() => toggleDescription(p._id)}
-                                                    className="ctl-toggle-desc-btn"
-                                                >
+                                                <button onClick={() => toggleDescription(p._id)} className="ctl-toggle-desc-btn">
                                                     {isExpanded ? "Mostrar menos" : "Mostrar más"}
                                                 </button>
                                             )}
                                         </p>
                                     )}
-
                                     <p><strong>Categoría:</strong> {p.categoria}</p>
                                     <p><strong>Precio:</strong> Q {p.precio}</p>
-
-                                    {p.enlace && (
-                                        <p>
-                                            <a href={p.enlace} target="_blank" rel="noopener noreferrer">
-                                                Ver más
-                                            </a>
-                                        </p>
-                                    )}
-
-                                    <button onClick={() => agregarAlCarrito(p)}>
-                                        Agregar al carrito
-                                    </button>
+                                    {p.enlace && <p><a href={p.enlace} target="_blank" rel="noopener noreferrer">Ver más</a></p>}
+                                    <button onClick={() => agregarAlCarrito(p)}>Agregar al carrito</button>
                                 </li>
-                            );
+                            )
                         })}
                     </ul>
-                ) : (
-                    <p>No hay productos disponibles.</p>
-                )}
+                ) : <p>No hay productos disponibles.</p>}
 
                 {totalPages > 1 && (
                     <div className="ctl-pagination-card">
@@ -150,7 +110,7 @@ const ClienteDashboard = () => {
                                 pageNumbers.push(i);
                             }
 
-                            return pageNumbers.map(page => (
+                            return pageNumbers.map((page) => (
                                 <button
                                     key={page}
                                     onClick={() => setCurrentPage(page)}
@@ -158,7 +118,7 @@ const ClienteDashboard = () => {
                                 >
                                     {page}
                                 </button>
-                            ));
+                            ))
                         })()}
 
                         <button
@@ -170,98 +130,32 @@ const ClienteDashboard = () => {
                     </div>
                 )}
 
-                {/* ===============================
-                    CARRITO
-                =============================== */}
                 <div className="ctl-carrito">
                     <h2>🛒 Carrito ({carrito.length})</h2>
-
                     {carrito.length > 0 ? (
                         <ul className="ctl-carrito-list">
                             {carrito.map(item => (
                                 <li key={item.nombre} className="ctl-carrito-item">
                                     <span className="ctl-carrito-nombre">{item.nombre}</span>
-
                                     <div className="ctl-carrito-cantidad">
-                                        <button
-                                            onClick={() =>
-                                                cambiarCantidad(item.nombre, Math.max(item.cantidad - 1, 1))
-                                            }
-                                            className="ctl-btn-icon"
-                                        >
-                                            <FaMinus />
-                                        </button>
-
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            value={item.cantidad}
-                                            onChange={e =>
-                                                cambiarCantidad(item.nombre, Number(e.target.value))
-                                            }
-                                        />
-
-                                        <button
-                                            onClick={() =>
-                                                cambiarCantidad(item.nombre, item.cantidad + 1)
-                                            }
-                                            className="ctl-btn-icon"
-                                        >
-                                            <FaPlus />
-                                        </button>
+                                        <button onClick={() => cambiarCantidad(item.nombre, Math.max(item.cantidad - 1, 1))} className="ctl-btn-icon"><FaMinus /></button>
+                                        <input type="number" min="1" value={item.cantidad} onChange={e => cambiarCantidad(item.nombre, Number(e.target.value))} />
+                                        <button onClick={() => cambiarCantidad(item.nombre, item.cantidad + 1)} className="ctl-btn-icon"><FaPlus /></button>
                                     </div>
-
-                                    {/* PRECIO MANUAL */}
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        placeholder={`Q${item.precioOriginal}`}
-                                        value={item.precioManual}
-                                        onChange={e =>
-                                            cambiarPrecio(item.nombre, e.target.value)
-                                        }
-                                        className="ctl-precio-manual"
-                                    />
-
-                                    {item.precioManual !== "" && (
-                                        <small className="ctl-precio-original">
-                                            Precio original: Q{item.precioOriginal}
-                                        </small>
-                                    )}
-
-                                    <span className="ctl-carrito-subtotal">
-                                        Q{item.subtotal}
-                                    </span>
-
-                                    <button
-                                        onClick={() => quitarDelCarrito(item.nombre)}
-                                        className="ctl-btn-trash"
-                                        title="Quitar del carrito"
-                                    >
-                                        <FaTrash />
-                                    </button>
+                                    <span className="ctl-carrito-subtotal">Q{item.subtotal}</span>
+                                    <button onClick={() => quitarDelCarrito(item.nombre)} className="ctl-btn-trash" title="Quitar del carrito"><FaTrash /></button>
                                 </li>
                             ))}
                         </ul>
-                    ) : (
-                        <p>No hay productos seleccionados.</p>
-                    )}
-
-                    <div className="ctl-carrito-total">
-                        <strong>Total: Q{calcularTotal()}</strong>
-                    </div>
-
-                    <button
-                        onClick={handleCrearCotizacion}
-                        disabled={carrito.length === 0 || loading}
-                        className="ctl-btn-crear"
-                    >
+                    ) : <p>No hay productos seleccionados.</p>}
+                    <div className="ctl-carrito-total"><strong>Total: Q{calcularTotal()}</strong></div>
+                    <button onClick={handleCrearCotizacion} disabled={carrito.length === 0 || loading} className="ctl-btn-crear">
                         {loading ? "Creando..." : "Crear Cotización"}
                     </button>
                 </div>
             </main>
         </div>
-    );
-};
+    )
+}
 
 export default ClienteDashboard;

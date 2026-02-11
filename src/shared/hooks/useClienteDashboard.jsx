@@ -7,9 +7,6 @@ export const useClienteDashbordHook = () => {
     const [carrito, setCarrito] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // ===============================
-    // TRAER PRODUCTOS
-    // ===============================
     const handleTraerProductos = async () => {
         if (loading) return;
         setLoading(true);
@@ -22,15 +19,12 @@ export const useClienteDashbordHook = () => {
                 title: "Error",
                 text: backendError?.error || backendError?.msg || "Error al cargar productos",
                 icon: "error",
-            });
+            })
         } finally {
             setLoading(false);
         }
-    };
+    }
 
-    // ===============================
-    // AGREGAR AL CARRITO
-    // ===============================
     const agregarAlCarrito = (producto) => {
         if (!producto?.nombre) return;
 
@@ -38,21 +32,17 @@ export const useClienteDashbordHook = () => {
             prev.some((item) => item.nombre === producto.nombre)
                 ? prev
                 : [
-                      ...prev,
-                      {
-                          nombre: producto.nombre,
-                          precioOriginal: producto.precio,
-                          precioManual: "",
-                          cantidad: 1,
-                          subtotal: producto.precio,
-                      },
-                  ]
-        );
-    };
+                    ...prev,
+                    {
+                        nombre: producto.nombre,
+                        precio: producto.precio,
+                        cantidad: 1,
+                        subtotal: producto.precio,
+                    },
+                ]
+        )
+    }
 
-    // ===============================
-    // QUITAR DEL CARRITO
-    // ===============================
     const quitarDelCarrito = (nombreProducto) => {
         Swal.fire({
             title: "¿Eliminar producto?",
@@ -64,81 +54,34 @@ export const useClienteDashbordHook = () => {
             confirmButtonColor: "#ef4444",
         }).then((result) => {
             if (result.isConfirmed) {
-                setCarrito((prev) =>
-                    prev.filter((item) => item.nombre !== nombreProducto)
-                );
+                setCarrito((prev) => prev.filter((item) => item.nombre !== nombreProducto));
                 Swal.fire({
                     title: "Producto eliminado",
                     icon: "success",
                     timer: 1000,
                     showConfirmButton: false,
-                });
+                })
             }
-        });
-    };
+        })
+    }
 
-    // ===============================
-    // CAMBIAR CANTIDAD
-    // ===============================
     const cambiarCantidad = (nombreProducto, cantidad) => {
         if (cantidad < 1) return;
-
         setCarrito((prev) =>
-            prev.map((item) => {
-                if (item.nombre !== nombreProducto) return item;
+            prev.map((item) =>
+                item.nombre === nombreProducto
+                    ? { ...item, cantidad, subtotal: item.precio * cantidad }
+                    : item
+            )
+        )
+    }
 
-                const precioFinal =
-                    item.precioManual !== ""
-                        ? Number(item.precioManual)
-                        : item.precioOriginal;
-
-                return {
-                    ...item,
-                    cantidad,
-                    subtotal: precioFinal * cantidad,
-                };
-            })
-        );
-    };
-
-    // ===============================
-    // CAMBIAR PRECIO MANUAL
-    // ===============================
-    const cambiarPrecio = (nombreProducto, nuevoPrecio) => {
-        setCarrito((prev) =>
-            prev.map((item) => {
-                if (item.nombre !== nombreProducto) return item;
-
-                const precioFinal =
-                    nuevoPrecio !== ""
-                        ? Number(nuevoPrecio)
-                        : item.precioOriginal;
-
-                return {
-                    ...item,
-                    precioManual: nuevoPrecio,
-                    subtotal: precioFinal * item.cantidad,
-                };
-            })
-        );
-    };
-
-    // ===============================
-    // CALCULAR TOTAL
-    // ===============================
     const calcularTotal = () =>
         carrito.reduce((acc, item) => acc + item.subtotal, 0);
 
-    // ===============================
-    // CREAR COTIZACIÓN
-    // ===============================
     const handleCrearCotizacion = async () => {
         if (!carrito.length) {
-            Swal.fire(
-                "Carrito vacío",
-                "Agrega productos antes de crear la cotización",
-                "warning"
-            );
+            Swal.fire("Carrito vacío", "Agrega productos antes de crear la cotización", "warning");
             return;
         }
 
@@ -150,23 +93,15 @@ export const useClienteDashbordHook = () => {
             confirmButtonText: "Sí, crear",
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#10b981",
-        });
+        })
 
         if (!confirm.isConfirmed) return;
 
         try {
             setLoading(true);
-
             const { data } = await crearCotizacion({
-                productos: carrito.map((item) => ({
-                    nombre: item.nombre,
-                    cantidad: item.cantidad,
-                    precio:
-                        item.precioManual !== ""
-                            ? Number(item.precioManual)
-                            : item.precioOriginal,
-                })),
-            });
+                productos: carrito.map(({ nombre, cantidad }) => ({ nombre, cantidad })),
+            })
 
             Swal.fire({
                 title: "Cotización creada",
@@ -174,7 +109,7 @@ export const useClienteDashbordHook = () => {
                 icon: "success",
                 timer: 1500,
                 showConfirmButton: false,
-            });
+            })
 
             setCarrito([]);
             return data.cotizacion;
@@ -184,15 +119,12 @@ export const useClienteDashbordHook = () => {
                 title: "Error",
                 text: backendError?.error || backendError?.msg || "Error al crear la cotización",
                 icon: "error",
-            });
+            })
         } finally {
             setLoading(false);
         }
-    };
+    }
 
-    // ===============================
-    // EXPORT
-    // ===============================
     return {
         productosList,
         carrito,
@@ -201,7 +133,6 @@ export const useClienteDashbordHook = () => {
         agregarAlCarrito,
         quitarDelCarrito,
         cambiarCantidad,
-        cambiarPrecio,
         calcularTotal,
         handleCrearCotizacion,
     };
