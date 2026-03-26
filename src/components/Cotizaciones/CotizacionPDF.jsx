@@ -145,7 +145,7 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
         0
     )
 
-    const productosPorPagina = chunkArray(cotizacion.productos, 10);
+    const productosPorPagina = chunkArray(cotizacion.productos, 9);
 
     return (
         <Document>
