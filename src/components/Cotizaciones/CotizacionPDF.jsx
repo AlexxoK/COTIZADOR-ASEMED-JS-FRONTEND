@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     header: { marginBottom: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
     logo: { width: 120, height: 40 },
     address: { textAlign: 'right', fontSize: 7, color: '#000' },
-    clientInfo: { marginBottom: 10, borderBottom: '1px solid #ccc', paddingBottom: 5 },
+    clientInfo: { marginBottom: 15, paddingBottom: 5 },
     infoRow: { flexDirection: 'row', marginBottom: 3 },
     infoLabel: { fontWeight: 'bold', width: 50, color: '#1e293b' },
     infoValue: { flex: 1, color: '#000' },
@@ -160,28 +160,21 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
 
                     {pageIndex === 0 && (
                         <View style={styles.clientInfo}>
-                            <View style={styles.infoRow}>
-                                <Text style={styles.infoLabel}>Señores:</Text>
-                                <Text style={styles.infoValue}>{clienteInfo?.nombre || 'Sin nombre'}</Text>
-                            </View>
-                            <View style={styles.infoRow}>
-                                <Text style={styles.infoLabel}>NIT:</Text>
-                                <Text style={styles.infoValue}>{clienteInfo?.nit || 'C/F'}</Text>
-                            </View>
-                            <View style={styles.infoRow}>
-                                <Text style={styles.infoLabel}>Correo:</Text>
-                                <Text style={styles.infoValue}>{clienteInfo?.correo || 'N/A'}</Text>
-                            </View>
-                            <View style={styles.infoRow}>
-                                <Text style={styles.infoLabel}>Teléfono:</Text>
-                                <Text style={styles.infoValue}>{clienteInfo?.telefono || 'N/A'}</Text>
-                            </View>
-                            <View style={styles.infoRow}>
-                                <Text style={styles.infoLabel}>Notas:</Text>
-                                <Text style={styles.infoValue}>
-                                    Por medio de la presente tengo el gusto de poderle cotizar el siguiente producto:
-                                </Text>
-                            </View>
+
+                            <Text style={styles.infoLabel}>Señores</Text>
+
+                            <Text style={{ marginTop: 6, fontWeight: 'bold' }}>
+                                {clienteInfo?.nombre || 'Sin nombre'}
+                            </Text>
+
+                            <Text style={{ marginTop: 2 }}>
+                                {clienteInfo?.nit || 'C/F'}
+                            </Text>
+
+                            <Text style={{ marginTop: 10 }}>
+                                Por medio de la presente tengo el gusto de poderle cotizar el siguiente producto:
+                            </Text>
+
                         </View>
                     )}
 
@@ -237,12 +230,18 @@ const CotizacionPDF = ({ cotizacion, vendedorNombre, clienteInfo }) => {
                             <View style={styles.terms}>
                                 <Text style={styles.termsTitle}>TÉRMINOS Y CONDICIONES:</Text>
                                 <Text style={styles.termItem}>• Forma de pago: Anticipada con depósito o transferencia</Text>
-                                <Text style={styles.termItem}>• Tiempo de entrega: 1 a 2 días hábiles después de validar pago</Text>
+                                <Text style={styles.termItem}>• Tiempo de entrega: 2 a 3 días hábiles después de validar pago</Text>
                                 <Text style={styles.termItem}>• Sostenimiento de oferta: 30 días</Text>
                                 <Text style={styles.termItem}>• Imágenes con fines ilustrativos, el producto final puede variar</Text>
                                 <Text style={styles.termItem}>• PRODUCTOS SUJETOS A EXISTENCIA Y/O PREVIA VENTA, PRECIOS PUEDEN VARIAR SIN PREVIO AVISO</Text>
                                 <Text style={styles.termItem}>• Envío a domicilio GRATIS dentro del perímetro de la capital por compras mínimas de Q200.00</Text>
                                 <Text style={styles.termItem}>• Envío al interior se realiza por medio de transporte (cliente cubre costo del envío)</Text>
+                            </View>
+
+                            <View style={styles.terms}>
+                                <Text style={styles.termsTitle}>IMPORTANTE:</Text>
+                                <Text style={styles.termItem}>• No olvide revisar su pedido al momento de la entrega. Verificar que este completo y en buen estado</Text>
+                                <Text style={styles.termItem}>• Una vez recibido, aceptado y firmada la factura, no se aceptan cambios ni devoluciones</Text>
                             </View>
 
                             <View style={styles.signatureSection}>

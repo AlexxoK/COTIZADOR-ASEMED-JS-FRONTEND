@@ -159,7 +159,7 @@ const ClienteCotizaciones = () => {
                                             className="clt-vendedor-input"
                                         />
 
-                                        <label className="clt-vendedor-label">Correo:</label>
+                                        {/*<label className="clt-vendedor-label">Correo:</label>
                                         <input
                                             type="email"
                                             placeholder="Coloque el correo del cliente"
@@ -179,7 +179,7 @@ const ClienteCotizaciones = () => {
                                                 handleClienteChange(id, "telefono", e.target.value)
                                             }
                                             className="clt-vendedor-input"
-                                        />
+                                        />*/}
                                     </div>
 
                                     <div className="clt-vendedor-container">
